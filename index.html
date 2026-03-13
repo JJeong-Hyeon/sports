@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다음스포츠 | 순위</title>
+    
+    <style>
+        /* 🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀🎀 */
+        
+        .backgournd {
+            position: relative;
+            background-color: white;
+        }
+
+        table {
+            width: 100%;
+            border-top: 1px solid #494949;
+            padding-top: 43px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f7f7f7;
+            border-top: 1px solid #494949;
+            padding: 12px 8px;
+
+        }
+        td {
+            padding: 12px 8px;
+
+        }
+
+        .team-logo { 
+            width: 28px; 
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+    
+    /* 🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍 */
+
+    <table id="rank-table">
+        <thead>
+            <tr>
+                <th>순위</th>
+                <th>팀</th>
+                <th>경기</th>
+                <th>승</th>
+                <th>무</th>
+                <th>패</th>
+                <th>승률</th>
+                <th>게임차</th>
+                <th>연속</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            </tbody>
+    </table>
+
+    <script>
+
+        const jsonUrl = 'https://prof-jwchi.github.io/kopo-front2026/Json/baseball.json';
+        
+        var request = new XMLHttpRequest();
+        request.open("GET", jsonUrl);
+        request.send();
+
+        request.addEventListener('load', () => {
+
+            const textData = request.response;
+            const data = JSON.parse(textData);
+
+            window.data = data;
+
+            // ❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤
+
+            const tbody = document.getElementById('table-body');
+
+            data.list.forEach(team => {
+                const tr = document.createElement('tr');
+
+                tr.innerHTML = `
+                    <td>${team.rank.rank}</td>
+                        <td>
+                            <div class="team-cell">
+                                <img src="${team.imageUrl}" class="team-logo">
+                                ${team.shortName}
+                            </div>
+                        </td>
+                        <td>${team.rank.game}</td>
+                        <td>${team.rank.win}</td>
+                        <td>${team.rank.draw}</td>
+                        <td>${team.rank.loss}</td>
+                        <td class="win-rate">${team.rank.wpct}</td>
+                        <td>${team.rank.gb}</td>
+                        <td>${team.rank.streak}</td>
+                    `;
+
+                    tbody.appendChild(tr);
+                    
+                });
+            });
+        
+
+    </script>
+
+</body>
+</html>
