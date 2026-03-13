@@ -15,6 +15,7 @@
 
         table {
             width: 100%;
+            border-collapse: collapse;
             border-top: 1px solid #494949;
             padding-top: 43px;
             box-sizing: border-box;
@@ -27,13 +28,29 @@
             padding: 12px 8px;
 
         }
+
         td {
             padding: 12px 8px;
 
         }
 
+        .team-cell { 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .td_name {
+            width: 570px;
+            height: 44px;
+            text-overflow: ellipsis;
+            text-align: left;
+        }
+
         .team-logo { 
-            width: 28px; 
+            width: 32px; 
+            height: 32px;
+            vertical-align: top;
         }
 
 
@@ -76,7 +93,7 @@
             const textData = request.response;
             const data = JSON.parse(textData);
 
-            window.data = data;
+            //window.data = data;
 
             // ❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤
 
@@ -87,7 +104,7 @@
 
                 tr.innerHTML = `
                     <td>${team.rank.rank}</td>
-                        <td>
+                        <td class="td_name">
                             <div class="team-cell">
                                 <img src="${team.imageUrl}" class="team-logo">
                                 ${team.shortName}
